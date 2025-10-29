@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>修仙游戏地图编辑器</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        .route-links {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .route-links a {
+            display: inline-block;
+            margin: 0 10px;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        .route-links a:hover {
+            background-color: #2980b9;
+        }
+
+        iframe {
+            width: 100%;
+            height: 80vh;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>修仙游戏地图编辑器</h1>
+
+    <div class="route-links">
+        <a href="MapEditor.html" target="content-frame">地图编辑器</a>
+        <!-- 可以在这里添加更多路由链接 -->
+    </div>
+
+    <iframe src="MapEditor.html" name="content-frame" id="contentFrame"></iframe>
+</div>
+
+<script>
+    // 自动路由功能
+    function handleRouting() {
+        const frame = document.getElementById('contentFrame');
+        const links = document.querySelectorAll('.route-links a');
+
+        // 默认加载地图编辑器
+        frame.src = 'MapEditor.html';
+
+        // 为每个链接添加点击事件
+        links.forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                const url = this.getAttribute('href');
+                frame.src = url;
+
+                // 更新活动链接样式
+                links.forEach(l => l.style.backgroundColor = '#3498db');
+                this.style.backgroundColor = '#2980b9';
+            });
+        });
+    }
+
+    // 页面加载完成后初始化路由
+    document.addEventListener('DOMContentLoaded', handleRouting);
+</script>
+</body>
+</html>
